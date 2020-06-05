@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfeqkwwi6cj30mw0mw3yc.jpg">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+<!--Navigation Bar-->
+<nav class="ui inverted attached segment m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu ">
+            <h2 class="ui teal header item">About Me</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>WELCOME</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>CATEGORIES</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>TAGS</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>ARCHIVES</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>ABOUT ME</a>
+            <div class="right m-item item m-mobile-hide">
+                <div class="ui icon inverted input m-margin-tb-tiny">
+                    <input type="text" placeholder="Search....">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+
+<!--content-->
+<div class="m-container m-padded-tb-large">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
+                <img src="https://unsplash.it/800/600?image=1005" alt="" class="ui rounded image">
+            </div>
+            <div class="five wide column">
+                <div class="top attached segment">
+                    <div class="ui header">About Me</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text">Naisheng Zhang, Software Developer, Love coding, Enjoy Freedom</p>
+                    <p class="m-text">Java, Python, SpringBoot, Spark</p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Programing</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Writing</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Traveling</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">....</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Algorithms</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Spark</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MySQL</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">....</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="https://github.com/NaishengZhang" class="ui circular icon button">
+                        <i class="github icon"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/naisheng-zhang-8088a6170/" class="ui circular icon button">
+                        <i class="linkedin icon"></i>
+                    </a>
+                    <a href="#" class="ui wechat circular icon button">
+                        <i class="weixin icon"></i>
+                    </a>
+                    <div class="ui wechat-qr flowing popup transition hidden">
+                        <img src="../static/images/wechat.png" alt="" class="ui rounded image" style="width: 120px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--bottom footer-->
+<footer class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
+                         class="ui rounded image" style="width: 110px">
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
+                    <a href="#" class="item">Phone: 347-204-5507</a>
+                </div>
+            </div>
+
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        on : 'click',
+        position: 'bottom center'
+    });
+</script>
+</body>
+</html>
