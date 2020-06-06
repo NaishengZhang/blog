@@ -3,7 +3,9 @@ package edu.nyu.blog.po;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -25,4 +27,6 @@ public class User {
     private Date createTime;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+    @OneToMany(mappedBy = "user")
+    private List<Blog> blogs = new ArrayList<>();
 }
