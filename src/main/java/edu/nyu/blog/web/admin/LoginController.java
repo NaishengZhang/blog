@@ -1,4 +1,4 @@
-package edu.nyu.blog.web;
+package edu.nyu.blog.web.admin;
 
 import edu.nyu.blog.po.User;
 import edu.nyu.blog.service.UserService;
