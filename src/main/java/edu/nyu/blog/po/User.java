@@ -12,6 +12,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -21,6 +22,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String nickname;
     private String avatar;
     private Integer type;
     @Temporal(TemporalType.TIMESTAMP)
