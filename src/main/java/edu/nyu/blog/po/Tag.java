@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class Tag {
     @Id
     @GeneratedValue

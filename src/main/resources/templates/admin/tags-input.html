@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags Input</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+</head>
+<body>
+<!--Navigation Bar-->
+<nav th:replace="admin/_fragments :: menu(3)" class="ui inverted attached segment m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu ">
+            <h2 class="ui teal header item">Tags Input</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>Blog</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>CATEGORIES</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>TAGS</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown  item">
+                    <div class="text">
+                        <img class="ui avatar image" src="../../static/images/me.jpg">
+                        Naisheng Zhang
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/tags/input}" class="active item">Add</a>
+            <a href="#" th:href="@{/admin/tags}"  class="teal item">List</a>
+        </div>
+    </div>
+</div>
+
+<!--content-->
+<div class="m-padded-tb-large">
+    <div class="ui container">
+        <form action="#" method="post" th:object="${tag}" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})}"  class="ui form">
+            <input type="hidden" name="id" th:value="*{id}">
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">Name</label>
+                    <input type="text" name="name" placeholder="Tags" th:value="*{name}">
+                </div>
+            </div>
+
+            <div class="ui error message"></div>
+            <!--/*/
+            <div class="ui negative message" th:if="${#fields.hasErrors('name')}"  >
+              <i class="close icon"></i>
+              <div class="header">Validation failed.</div>
+              <p th:errors="*{name}">Information didn't match the rule.</p>
+            </div>
+             /*/-->
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
+                <button class="ui teal submit button">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<!--bottom footer-->
+<footer th:replace="admin/_fragments :: menu(3)" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
+                         class="ui rounded image" style="width: 110px">
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
+                    <a href="#" class="item">Phone: 347-204-5507</a>
+                </div>
+            </div>
+
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
+    </div>
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    //前端校验
+    $('.ui.form').form({
+        fields: {
+            title: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Name is required'
+                }]
+            }
+        }
+    });
+
+</script>
+</body>
+</html>
