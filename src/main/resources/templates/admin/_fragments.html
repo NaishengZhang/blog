@@ -18,9 +18,9 @@
   <div class="ui container">
     <div class="ui inverted secondary stackable menu ">
       <h2 class="ui teal header item">Admin</h2>
-      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>Blog</a>
-      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>CATEGORIES</a>
-      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>TAGS</a>
+      <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>Blog</a>
+      <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>CATEGORIES</a>
+      <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>TAGS</a>
       <div class="right m-item m-mobile-hide menu" >
         <div class="ui dropdown  item">
           <div class="text">
