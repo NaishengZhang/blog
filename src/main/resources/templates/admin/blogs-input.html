@@ -249,9 +249,17 @@
                     type: 'empty',
                     prompt: 'Please add image link.'
                 }]
+            },
+            description: {
+                identifier: 'description',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客描述'
+                }]
             }
         }
     });
+
 
     $('#save-btn').click(function () {
         $('[name="published"]').val(false);
