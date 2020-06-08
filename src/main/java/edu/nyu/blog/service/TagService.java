@@ -1,9 +1,10 @@
 package edu.nyu.blog.service;
 
 import edu.nyu.blog.po.Tag;
-import edu.nyu.blog.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface TagService {
     Tag saveTag(Tag tag);
@@ -13,6 +14,10 @@ public interface TagService {
     Tag getTagByName(String name);
 
     Page<Tag> listTag(Pageable pageable);
+
+    List<Tag> listTag();
+
+    List<Tag> listTag(String ids);
 
     Tag updateTag(Long id, Tag tag);
 

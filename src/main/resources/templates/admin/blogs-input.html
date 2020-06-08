@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="_fragments :: head(~{::title})">
+<head th:replace="admin/_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input</title>
@@ -10,7 +10,7 @@
 </head>
 <body>
 <!--Navigation Bar-->
-<nav class="ui inverted attached segment m-shadow-small">
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-shadow-small">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu ">
             <h2 class="ui teal header item">Input</h2>
@@ -46,9 +46,10 @@
 </div>
 
 <!--content-->
-<div class="m-padded-tb-large">
+<div class="m-container m-padded-tb-large">
     <div class="ui container">
-        <form action="#" method="post" class="ui form">
+        <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
+            <input type="hidden" name="published">
             <div class="required field">
                 <div class="ui left labeled input">
                     <div class="ui selection compact teal basic dropdown label">
@@ -65,141 +66,140 @@
                 </div>
             </div>
 
-            <div class="field">
+            <div class="required field">
                 <div id="md-content" style="z-index: 1 !important;">
-            <textarea placeholder="博客内容" name="content" style="display: none">
-              [TOC]
-    #### Disabled options
-    - TeX (Based on KaTeX);
-    - Emoji;
-    - Task lists;
-    - HTML tags decode;
-    - Flowchart and Sequence Diagram;
-    </textarea>
-    </div>
-    </div>
+                    <textarea placeholder="Blog Content" name="content" style="display: none"></textarea>
+                </div>
+            </div>
 
-    <div class="two fields">
-        <div class="field">
-        <div class="ui left labeled action input">
-        <label class="ui compact teal basic label">Categories</label>
-        <div class="ui fluid selection dropdown">
-        <input type="hidden" name="category">
-        <i class="dropdown icon"></i>
-        <div class="default text">Categories</div>
-        <div class="menu">
-        <div class="item" data-value="1">Error Log</div>
-    <div class="item" data-value="1">Manual</div>
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="field">
-        <div class="ui left labeled action input">
-        <label class="ui compact teal basic label">Tags</label>
-        <div class="ui fluid selection multiple search dropdown">
-        <input type="hidden" name="tag">
-        <i class="dropdown icon"></i>
-        <div class="default text">Tags</div>
-        <div class="menu">
-        <div class="item" data-value="1">Java</div>
-        <div class="item" data-value="2">Python</div>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+            <div class="two fields">
+                <div class="required field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact teal basic label">Categories</label>
+                        <div class="ui fluid selection dropdown">
+                            <input type="hidden" name="type.id">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Categories</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}"
+                                     th:text="${type.name}">Error Log
+                                </div>
 
-        <div class="field">
-        <div class="ui left labeled input">
-        <label class="ui teal basic label">Image Link</label>
-    <input type="text" name="indexPicture" placeholder="Image Link">
-        </div>
-        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left labeled action input">
+                        <label class="ui compact teal basic label">Tags</label>
+                        <div class="ui fluid selection multiple search dropdown">
+                            <input type="hidden" name="tagIds">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Tags</div>
+                            <div class="menu">
+                                <div th:each="tag:${tags}" class="item" data-value="1" th:data-value="${tag.id}"
+                                     th:text="${tag.name}">Java
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="inline fields">
-        <div class="field">
-        <div class="ui checkbox">
-        <input type="checkbox" id="recommend" name="recommend" class="hidden">
-        <label for="recommend">Recommendation</label>
-        </div>
-        <div class="ui checkbox">
-        <input type="checkbox" id="shareInfo" name="shareInfo" class="hidden">
-        <label for="shareInfo">ShareInfo</label>
-        </div>
-        <div class="ui checkbox">
-        <input type="checkbox" id="appreciation" name="appreciation" class="hidden">
-        <label for="appreciation">Appreciation</label>
-        </div>
-        <div class="ui checkbox">
-        <input type="checkbox" id="comment" name="comment" class="hidden">
-        <label for="comment">Comment</label>
-        </div>
-        </div>
-        </div>
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui teal basic label">Image Link</label>
+                    <input type="text" name="firstPicture" placeholder="Image Link">
+                </div>
+            </div>
 
-        <div class="ui right aligned container">
-        <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
-        <button class="ui secondary button">Save</button>
-        <button class="ui secondary button">Post</button>
-        </div>
+            <div class="inline fields">
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="recommend" name="recommend" class="hidden">
+                        <label for="recommend">Recommendation</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+                        <label for="shareStatement">ShareInfo</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="appreciation" name="appreciation" class="hidden">
+                        <label for="appreciation">Appreciation</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="commentabled" name="commentabled" class="hidden">
+                        <label for="commentabled">Comment</label>
+                    </div>
+                </div>
+            </div>
 
-        <div class="ui error message"></div>
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" onclick="window.history.go(-1)">Return</button>
+                <button type="button" id="save-btn" class="ui secondary button">Save</button>
+                <button type="button" id="publish-btn" class="ui secondary button">Post</button>
+            </div>
+
+            <div class="ui error message"></div>
         </form>
-        </div>
-        </div>
+    </div>
+</div>
 
-        <!--bottom footer-->
-        <footer class="ui inverted vertical segment m-padded-tb-massive">
-        <div class="ui center aligned container">
+<!--bottom footer-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
-        <div class="three wide column">
-        <div class="ui inverted link list">
-        <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
-    class="ui rounded image" style="width: 110px">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
+                         class="ui rounded image" style="width: 110px">
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                    <a href="#" class="item">User Story</a>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
+                    <a href="#" class="item">Phone: 347-204-5507</a>
+                </div>
+            </div>
+
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
+            </div>
         </div>
-        </div>
-
-        <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
-    <div class="ui inverted link list">
-        <a href="#" class="item">User Story</a>
-    <a href="#" class="item">User Story</a>
-    <a href="#" class="item">User Story</a>
-    </div>
-    </div>
-
-    <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
-    <div class="ui inverted link list">
-        <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
-    <a href="#" class="item">Phone: 347-204-5507</a>
-    </div>
-    </div>
-
-    <div class="seven wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
-        <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
-    </div>
-    </div>
-    <div class="ui inverted section divider"></div>
+        <div class="ui inverted section divider"></div>
         <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
     </div>
-    </footer>
+</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/</th:block>/*/-->
+
 
 <script>
     //initialize Markdown Editor
     var contentEditor;
-    $(function() {
+    $(function () {
         contentEditor = editormd("md-content", {
-            width   : "100%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "../static/lib/editormd/lib/"
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            // path: "../static/lib/editormd/lib/"
+            path: "/lib/editormd/lib/"
+
         });
     });
 
@@ -216,11 +216,44 @@
                 identifier: 'title',
                 rules: [{
                     type: 'empty',
-                    prompt: 'Title：Title is required'
+                    prompt: 'Title is required'
+                }]
+            },
+            content: {
+                identifier: 'content',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter blog content.'
+                }]
+            },
+            typeId: {
+                identifier: 'type.id',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please enter category name.'
+                }]
+            },
+            firstPicture: {
+                identifier: 'firstPicture',
+                rules: [{
+                    type: 'empty',
+                    prompt: 'Please add image link.'
                 }]
             }
         }
     });
+
+    $('#save-btn').click(function () {
+        $('[name="published"]').val(false);
+        $('#blog-form').submit();
+    });
+
+
+    $('#publish-btn').click(function () {
+        $('[name="published"]').val(true);
+        $('#blog-form').submit();
+    });
+
 
 </script>
 </body>

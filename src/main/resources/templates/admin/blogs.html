@@ -54,18 +54,24 @@
                     <input type="text" name="title" placeholder="Title">
                 </div>
                 <div class="field">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="typeId">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Categories</div>
-                        <div class="menu">
-                            <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">Error Log</div>
-                            <!--/*-->
-                            <div class="item" data-value="2">Manual</div>
-                            <!--*/-->
+                    <div class="ui labeled action input">
+                        <div class="ui type selection dropdown">
+                            <input type="hidden" name="typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Categories</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}"
+                                     th:text="${type.name}">Error Log
+                                </div>
+                                <!--/*-->
+                                <div class="item" data-value="2">Manual</div>
+                                <!--*/-->
+                            </div>
                         </div>
+                        <button id="clear-btn" class="ui compact button">clear</button>
                     </div>
                 </div>
+
                 <div class="field">
                     <div class="ui checkbox">
                         <input type="checkbox" name="recommend">
@@ -73,129 +79,157 @@
                     </div>
                 </div>
                 <div class="filed">
-                    <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>Search</button>
+                    <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>Search
+                    </button>
                 </div>
             </div>
-        </form>
+            </form>
 
-        <div id="table-container">
-            <table th:fragment="blogList" class="ui compact teal celled table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Title</th>
-                    <th>Categories</th>
-                    <th>Recommend</th>
-                    <th>Update time</th>
-                    <th>Operation</th>
-                </tr>
-                </thead>
+            <div id="table-container">
+                <table th:fragment="blogList" class="ui compact teal celled table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Categories</th>
+                        <th>Recommend</th>
+                        <th>Published</th>
+                        <th>Update time</th>
+                        <th>Operation</th>
+                    </tr>
+                    </thead>
 
-                <tbody>
-                <tr th:each="blog,iterStat : ${page.content}"> <!--get blog and iterstat from page.content-->
-                    <td th:text="${iterStat.count}">1</td>
-                    <td th:text="${blog.title}">Introduction to DFS</td>
-                    <td th:text="${blog.type.name}">Algorithms</td>
-                    <td th:text="${blog.recommend} ? 'yes' : 'No'">Yes</td>
-                    <td th:text="${blog.updateTime}">2019-10-02 09:45</td>
-                    <td>
-                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui mini teal basic button">Edit</a>
-                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui mini red basic button">Delete</a>
-                    </td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <th colspan="6">
-                        <div class="ui pagination menu" th:if="${page.totalPages}>1">
-                            <a onclick="this" th:attr="data-page=${page.number}-1" th:unless="${page.first}" class=" item">Previous Page</a>
-                            <a onclick="this" th:attr="data-page=${page.number}+1" th:unless="${page.last}" class=" item">Next Page</a>
-                        </div>
-                        <a href="#" class="ui mini right floated teal basic button">Add</a>
-                    </th>
+                    <tbody>
+                    <tr th:each="blog,iterStat : ${page.content}"> <!--get blog and iterstat from page.content-->
+                        <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${blog.title}">Introduction to DFS</td>
+                        <td th:text="${blog.type.name}">Algorithms</td>
+                        <td th:text="${blog.recommend} ? 'Yes' : 'No'">Yes</td>
+                        <td th:text="${blog.published} ? 'Draft' : 'Published'">Draft</td>
+                        <td th:text="${blog.updateTime}">2019-10-02 09:45</td>
+                        <td>
+                            <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"
+                               class="ui mini teal basic button">Edit</a>
+                            <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}"
+                               class="ui mini red basic button">Delete</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="7">
+                            <div class="ui pagination menu" th:if="${page.totalPages}>1">
+                                <a onclick="page(this)" th:attr="data-page=${page.number}-1" th:unless="${page.first}"
+                                   class=" item">Previous Page</a>
+                                <a onclick="page(this)" th:attr="data-page=${page.number}+1" th:unless="${page.last}"
+                                   class=" item">Next Page</a>
+                            </div>
+                            <a href="#" th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">Add</a>
+                        </th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+                <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                    <i class="close icon"></i>
+                    <div class="header">Notice:</div>
+                    <p th:text="${message}">Congrats！</p>
+                </div>
+
+            </div>
 
 
-
-                </tr>
-                </tfoot>
-            </table>
         </div>
-
-
     </div>
-</div>
 
-<!--bottom footer-->
-<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
-    <div class="ui center aligned container">
-        <div class="ui inverted divided stackable grid">
-            <div class="three wide column">
-                <div class="ui inverted link list">
-                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
-                         class="ui rounded image" style="width: 110px">
+    <!--bottom footer-->
+    <footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfenb5ay55j30cs0cswep.jpg"
+                             class="ui rounded image" style="width: 110px">
+                    </div>
+                </div>
+
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                        <a href="#" class="item">User Story</a>
+                    </div>
+                </div>
+
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
+                        <a href="#" class="item">Phone: 347-204-5507</a>
+                    </div>
+                </div>
+
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and
+                        work.</p>
                 </div>
             </div>
-
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">User Story</a>
-                    <a href="#" class="item">User Story</a>
-                    <a href="#" class="item">User Story</a>
-                </div>
-            </div>
-
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
-                    <a href="#" class="item">Phone: 347-204-5507</a>
-                </div>
-            </div>
-
-            <div class="seven wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
-                <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
-            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
         </div>
-        <div class="ui inverted section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
-    </div>
-</footer>
+    </footer>
 
-<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-<!--/*/</th:block>/*/-->
+    <!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
 
-<script>
-    $('.menu.toggle').click(function () {
-        $('.m-item').toggleClass('m-mobile-hide');
-    });
-    $('.ui.dropdown').dropdown({
-        on : 'hover'
-    });
-
-    function page(obj) {
-        $("[name='page']").val($(obj).data("page"));
-        loaddata();
-    }
-
-    $("#search-btn").click(function () {
-        $("[name='page']").val(0);
-        loaddata();
-    });
-
-    /*ajax 局部渲染 刷新*/
-    function loaddata() {
-        $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search",{
-            title : $("[name='title']").val(),
-            typeId : $("[name='typeId']").val(),
-            recommend : $("[name='recommend']").prop('checked'),
-            page : $("[name='page']").val()
+    <script>
+        $('.menu.toggle').click(function () {
+            $('.m-item').toggleClass('m-mobile-hide');
         });
-    }
+        $('.ui.dropdown').dropdown({
+            on: 'hover'
+        });
 
-</script>
+        //消息提示关闭初始化
+        $('.message .close')
+            .on('click', function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+
+        $('#clear-btn')
+            .on('click', function () {
+                $('.ui.type.dropdown')
+                    .dropdown('clear')
+                ;
+            })
+        ;
+
+        function page(obj) {
+            $("[name='page']").val($(obj).data("page"));
+            loaddata();
+        }
+
+        $("#search-btn").click(function () {
+            $("[name='page']").val(0);
+            loaddata();
+        });
+
+        /*ajax 局部渲染 刷新*/
+        function loaddata() {
+            $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search", {
+                title: $("[name='title']").val(),
+                typeId: $("[name='typeId']").val(),
+                recommend: $("[name='recommend']").prop('checked'),
+                page: $("[name='page']").val()
+            });
+        }
+
+    </script>
 </body>
 </html>

@@ -1,9 +1,7 @@
 package edu.nyu.blog.web.admin;
 
 import edu.nyu.blog.po.Tag;
-import edu.nyu.blog.po.Type;
 import edu.nyu.blog.service.TagService;
-import edu.nyu.blog.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,8 +25,8 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping("/tags")
-    public String tags(@PageableDefault(size = 5, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
-                        Model model) {
+    public String tags(@PageableDefault(size = 8, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+                       Model model) {
         model.addAttribute("page", tagService.listTag(pageable));
         return "admin/tags";
     }
