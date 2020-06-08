@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:replace="${title}">Blog</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+  <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+  <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+  <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+<!--navigation-->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+  <div class="ui container">
+    <div class="ui inverted secondary stackable menu">
+      <h2 class="ui teal header item">Blog</h2>
+      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i>WELCOME</a>
+      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>CATEGORIES</a>
+      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>TAGS</a>
+      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>ARCHIVES</a>
+      <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>ABOUT ME</a>
+      <div class="right m-item item m-mobile-hide">
+        <div class="ui icon inverted transparent input m-margin-tb-tiny">
+          <input type="text" placeholder="Search....">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+<!--bottom footer-->
+<footer th:fragment="footer"  class="ui inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="three wide column">
+        <div class="ui inverted link list">
+          <img src="../static/images/me.jpg" th:src="@{/images/me.jpg}"
+               class="ui rounded image" style="width: 110px">
+        </div>
+      </div>
+
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">User Story</a>
+          <a href="#" class="item">User Story</a>
+          <a href="#" class="item">User Story</a>
+        </div>
+      </div>
+
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
+          <a href="#" class="item">Phone: 347-204-5507</a>
+
+        </div>
+      </div>
+
+      <div class="seven wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced">NAISHENG</h4>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">Share some thoughts about code, life and work.</p>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2019 - 2020 Designed by Naisheng Zhang</p>
+  </div>
+</footer>
+
+
+
+<th:block th:fragment="script">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+  <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+  <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+  <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+</th:block>
+
+</body>
+</html>

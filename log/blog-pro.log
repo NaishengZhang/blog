@@ -1,0 +1,4 @@
+2020-06-04 18:00:53.267  INFO 71270 --- [restartedMain] edu.nyu.blog.BlogApplication             : Starting BlogApplication on Jonathans-MBP-5.fios-router.home with PID 71270 (/Users/jonathan/Documents/workspace/blog/target/classes started by jonathan in /Users/jonathan/Documents/workspace/blog)
+2020-06-04 18:00:53.269  INFO 71270 --- [restartedMain] edu.nyu.blog.BlogApplication             : The following profiles are active: pro
+2020-06-04 18:01:13.793  WARN 71270 --- [restartedMain] .t.AbstractTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-06-04 18:01:15.636  INFO 71270 --- [restartedMain] edu.nyu.blog.BlogApplication             : Started BlogApplication in 24.016 seconds (JVM running for 27.135)
