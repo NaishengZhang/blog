@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:replace="${title}">Blog</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
-  <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
-  <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
-  <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
-  <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
   <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+
 </head>
 <body>
 
@@ -24,8 +21,8 @@
       <div class="right m-item m-mobile-hide menu" >
         <div class="ui dropdown  item">
           <div class="text">
-            <img class="ui avatar image" src="../../static/images/me.jpg" th:src="@{/images/me.jpg}">
-            Naisheng Zhang
+            <img class="ui avatar image" src="../../static/images/me.jpg" th:src="@{${session.user.avatar}}">
+            <span th:text="${session.user.nickname}">Naisheng Zhang</span>
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">
@@ -84,11 +81,6 @@
 <th:block th:fragment="script">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
-  <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
-  <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-  <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-  <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
 </th:block>
 
 </body>
