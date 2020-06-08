@@ -38,8 +38,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="item">Post</a>
-            <a href="#" class="teal active item">List</a>
+            <a href="#" th:href="@{/admin/blogs/input}" class="item">Post</a>
+            <a href="#" th:href="@{/admin/blogs}" class="teal active item">List</a>
         </div>
     </div>
 </div>
@@ -93,7 +93,7 @@
                         <th>Title</th>
                         <th>Categories</th>
                         <th>Recommend</th>
-                        <th>Published</th>
+                        <th>Status</th>
                         <th>Update time</th>
                         <th>Operation</th>
                     </tr>
@@ -105,7 +105,7 @@
                         <td th:text="${blog.title}">Introduction to DFS</td>
                         <td th:text="${blog.type.name}">Algorithms</td>
                         <td th:text="${blog.recommend} ? 'Yes' : 'No'">Yes</td>
-                        <td th:text="${blog.published} ? 'Draft' : 'Published'">Draft</td>
+                        <td th:text="${blog.published} ? 'Published' : 'Draft'">Draft</td>
                         <td th:text="${blog.updateTime}">2019-10-02 09:45</td>
                         <td>
                             <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}"

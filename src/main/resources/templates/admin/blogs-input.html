@@ -39,8 +39,8 @@
 <div class="ui attached pointing menu">
     <div class="ui container">
         <div class="right menu">
-            <a href="#" class="teal active item">Post</a>
-            <a href="#" class="item">List</a>
+            <a href="#" th:href="@{/admin/blogs/input}" class="teal active item">Post</a>
+            <a href="#" th:href="@{/admin/blogs}" class="item">List</a>
         </div>
     </div>
 </div>
@@ -48,12 +48,13 @@
 <!--content-->
 <div class="m-container m-padded-tb-large">
     <div class="ui container">
-        <form id="blog-form" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
-            <input type="hidden" name="published">
+        <form id="blog-form" action="#" th:object="${blog}" th:action="@{/admin/blogs}" method="post" class="ui form">
+            <input type="hidden" name="published" th:value="*{published}">
+            <input type="hidden" name="id" th:value="*{id}">
             <div class="required field">
                 <div class="ui left labeled input">
                     <div class="ui selection compact teal basic dropdown label">
-                        <input type="hidden" value="Original">
+                        <input type="hidden" value="Original" name="flag" th:value="*{flag}">
                         <i class="dropdown icon"></i>
                         <div class="default text">Original</div>
                         <div class="menu">
@@ -62,13 +63,14 @@
                             <div class="item" data-value="Translation">Translation</div>
                         </div>
                     </div>
-                    <input type="text" name="title" placeholder="Title">
+                    <input type="text" name="title" placeholder="Title" th:value="*{title}">
                 </div>
             </div>
 
             <div class="required field">
                 <div id="md-content" style="z-index: 1 !important;">
-                    <textarea placeholder="Blog Content" name="content" style="display: none"></textarea>
+                    <textarea placeholder="Blog Content" name="content" style="display: none"
+                              th:text="*{content}"></textarea>
                 </div>
             </div>
 
@@ -77,7 +79,7 @@
                     <div class="ui left labeled action input">
                         <label class="ui compact teal basic label">Categories</label>
                         <div class="ui fluid selection dropdown">
-                            <input type="hidden" name="type.id">
+                            <input type="hidden" name="type.id" th:value="*{type}!=null ? *{type.id}">
                             <i class="dropdown icon"></i>
                             <div class="default text">Categories</div>
                             <div class="menu">
@@ -93,7 +95,7 @@
                     <div class="ui left labeled action input">
                         <label class="ui compact teal basic label">Tags</label>
                         <div class="ui fluid selection multiple search dropdown">
-                            <input type="hidden" name="tagIds">
+                            <input type="hidden" name="tagIds" th:value="*{tagIds}">
                             <i class="dropdown icon"></i>
                             <div class="default text">Tags</div>
                             <div class="menu">
@@ -109,26 +111,34 @@
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">Image Link</label>
-                    <input type="text" name="firstPicture" placeholder="Image Link">
+                    <input type="text" name="firstPicture" th:value="*{firstPicture}" placeholder="Image Link">
                 </div>
+            </div>
+
+            <div class="required field">
+                <textarea name="description" th:text="*{description}" placeholder="Blog description..."
+                          maxlength="200"></textarea>
             </div>
 
             <div class="inline fields">
                 <div class="field">
                     <div class="ui checkbox">
-                        <input type="checkbox" id="recommend" name="recommend" class="hidden">
+                        <input type="checkbox" id="recommend" name="recommend" th:checked="*{recommend}" class="hidden">
                         <label for="recommend">Recommendation</label>
                     </div>
                     <div class="ui checkbox">
-                        <input type="checkbox" id="shareStatement" name="shareStatement" class="hidden">
+                        <input type="checkbox" id="shareStatement" name="shareStatement" th:checked="*{shareStatement}"
+                               class="hidden">
                         <label for="shareStatement">ShareInfo</label>
                     </div>
                     <div class="ui checkbox">
-                        <input type="checkbox" id="appreciation" name="appreciation" class="hidden">
+                        <input type="checkbox" id="appreciation" name="appreciation" th:checked="*{appreciation}"
+                               class="hidden">
                         <label for="appreciation">Appreciation</label>
                     </div>
                     <div class="ui checkbox">
-                        <input type="checkbox" id="commentabled" name="commentabled" class="hidden">
+                        <input type="checkbox" id="commentabled" name="commentabled" th:checked="*{commentabled}"
+                               class="hidden">
                         <label for="commentabled">Comment</label>
                     </div>
                 </div>
