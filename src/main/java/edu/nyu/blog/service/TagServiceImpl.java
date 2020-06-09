@@ -1,6 +1,6 @@
 package edu.nyu.blog.service;
 
-import edu.nyu.blog.NotFoundExcepiton;
+import edu.nyu.blog.NotFoundException;
 import edu.nyu.blog.dao.TagRepository;
 import edu.nyu.blog.po.Tag;
 import org.springframework.beans.BeanUtils;
@@ -78,7 +78,7 @@ public class TagServiceImpl implements TagService {
     public Tag updateTag(Long id, Tag tag) {
         Tag t = tagRepository.findOne(id);
         if (t == null) {
-            throw new NotFoundExcepiton("type not exist");
+            throw new NotFoundException("type not exist");
         }
         BeanUtils.copyProperties(tag, t);
 

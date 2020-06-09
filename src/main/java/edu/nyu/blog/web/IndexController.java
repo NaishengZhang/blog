@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,15 +28,6 @@ public class IndexController {
     @Autowired
     private TagService tagService;
 
-    //    @GetMapping("/")
-//    public String index(@PageableDefault(size = 10, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
-//                        Model model) {
-//        model.addAttribute("page", blogService.listBlog(pageable));
-//        model.addAttribute("types", typeService.listTypeTop(6));
-//        model.addAttribute("tags", tagService.listTagTop(10));
-//        model.addAttribute("recommendBlogs", blogService.listRecommendBlogTop(8)); // index.html <div class="ui segment" th:each="blog : ${recommendBlogs}">
-//        return "index";
-//    }
     @GetMapping("/")
     public String index(@PageableDefault(size = 8, sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable,
                         Model model) {
@@ -55,7 +47,8 @@ public class IndexController {
     }
 
     @GetMapping("/blog/{id}")
-    public String blog() {
+    public String blog(@PathVariable Long id, Model model) {
+        model.addAttribute("blog", blogService.getAndConvert(id));
         return "blog";
     }
 

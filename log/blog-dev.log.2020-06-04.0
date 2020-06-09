@@ -6031,7 +6031,7 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 2020-06-04 18:42:38.360  INFO 79997 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : FrameworkServlet 'dispatcherServlet': initialization completed in 3 ms
 2020-06-04 18:42:38.362 ERROR 79997 --- [http-nio-8080-exec-1] e.n.b.h.ControllerExceptionHandler       : Request URL: http://localhost:8080/, Exception: {}
 
-edu.nyu.blog.NotFoundExcepiton: blog not exit
+edu.nyu.blog.NotFoundException: blog not exit
 	at edu.nyu.blog.web.IndexController.index(IndexController.java:14)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -6088,7 +6088,7 @@ edu.nyu.blog.NotFoundExcepiton: blog not exit
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
 
-2020-06-04 18:42:38.365  WARN 79997 --- [http-nio-8080-exec-1] .w.s.m.a.ResponseStatusExceptionResolver : Resolved exception caused by Handler execution: edu.nyu.blog.NotFoundExcepiton: blog not exit
+2020-06-04 18:42:38.365  WARN 79997 --- [http-nio-8080-exec-1] .w.s.m.a.ResponseStatusExceptionResolver : Resolved exception caused by Handler execution: edu.nyu.blog.NotFoundException: blog not exit
 2020-06-04 18:43:24.331  INFO 79997 --- [Thread-29] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7085fd31: startup date [Thu Jun 04 18:42:31 EDT 2020]; root of context hierarchy
 2020-06-04 18:43:24.332  INFO 79997 --- [Thread-29] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
 2020-06-04 18:43:24.332  INFO 79997 --- [Thread-29] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

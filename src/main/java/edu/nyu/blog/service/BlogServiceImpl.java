@@ -1,9 +1,10 @@
 package edu.nyu.blog.service;
 
-import edu.nyu.blog.NotFoundExcepiton;
+import edu.nyu.blog.NotFoundException;
 import edu.nyu.blog.dao.BlogRepository;
 import edu.nyu.blog.po.Blog;
 import edu.nyu.blog.po.Type;
+import edu.nyu.blog.util.MarkdownUtils;
 import edu.nyu.blog.util.MyBeanUtils;
 import edu.nyu.blog.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -29,6 +30,19 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     BlogRepository blogRepository;
+
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogRepository.findOne(id);
+        if (blog == null) {
+            throw new NotFoundException("The blog doesn't exist");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        String content = b.getContent();
+        b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return b;
+    }
 
     @Override
     public Blog getBlog(Long id) {
@@ -71,10 +85,6 @@ public class BlogServiceImpl implements BlogService {
         } else {
             blog.setUpdateTime(new Date());
         }
-
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
-        blog.setViews(0);
         return blogRepository.save(blog);
     }
 
@@ -83,11 +93,11 @@ public class BlogServiceImpl implements BlogService {
     public Blog updateBlog(Long id, Blog blog) {
         Blog b = blogRepository.findOne(id);
         if (b == null) {
-            throw new NotFoundExcepiton("The Blog Not Exist");
+            throw new NotFoundException("The Blog Not Exist");
         }
         BeanUtils.copyProperties(blog, b, MyBeanUtils.getNullPropertyNames(blog));
         b.setUpdateTime(new Date());
-        return blogRepository.save(blog);
+        return blogRepository.save(b);
     }
 
     @Override

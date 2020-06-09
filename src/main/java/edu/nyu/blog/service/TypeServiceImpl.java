@@ -1,6 +1,6 @@
 package edu.nyu.blog.service;
 
-import edu.nyu.blog.NotFoundExcepiton;
+import edu.nyu.blog.NotFoundException;
 import edu.nyu.blog.dao.TypeRepository;
 import edu.nyu.blog.po.Type;
 import org.springframework.beans.BeanUtils;
@@ -61,7 +61,7 @@ public class TypeServiceImpl implements TypeService {
     public Type updateType(Long id, Type type) {
         Type t = typeRepository.findOne(id);
         if (t == null) {
-            throw new NotFoundExcepiton("type not exist");
+            throw new NotFoundException("type not exist");
         }
         BeanUtils.copyProperties(type, t);
 
