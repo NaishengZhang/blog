@@ -186,7 +186,7 @@ h5,h6{font-size:1em;}
 
             <!--rewards-->
             <div class="ui center aligned basic segment">
-                <button id="payButton" class="ui orange basic circular button">Rewards</button>
+                <button id="payButton" class="ui orange basic circular button">Buy Me A Bubble Tea</button>
             </div>
             <div class="ui payQR flowing popup transition hidden">
                 <div class="ui orange basic label">
@@ -253,6 +253,31 @@ h5,h6{font-size:1em;}
                                        onclick="reply(this)">Reply</a>
                                 </div>
                             </div>
+
+                            <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                                <div class="comment" th:each="reply : ${comment.replyComments}">
+
+                                    <a class="author">
+                                        <span th:text="${reply.nickname}">Matt</span>
+                                        &nbsp;<span th:text="|@ ${reply.parentComment.nickname}"
+                                                    class="m-teal">@ Jenny</span>
+                                    </a>
+
+                                    <div class="metadata">
+                                    <span class="date"
+                                          th:text="${#dates.format(reply.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
+                                    </div>
+                                    <div class="text" th:text="${reply.content}">
+                                        How artistic!
+                                    </div>
+                                    <div class="actions">
+                                        <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                                           th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}"
+                                           onclick="reply(this)">Reply</a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="comment">
@@ -308,6 +333,7 @@ h5,h6{font-size:1em;}
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -475,7 +501,7 @@ h5,h6{font-size:1em;}
             }
         }
     });
-
+    /*when open a new page, load comments list at first*/
     $(function () {
         $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"comments/6");
     });
