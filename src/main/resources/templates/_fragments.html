@@ -23,10 +23,13 @@
       <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>ARCHIVES</a>
       <a href="#" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>ABOUT ME</a>
       <div class="right m-item item m-mobile-hide">
-        <div class="ui icon inverted transparent input m-margin-tb-tiny">
-          <input type="text" placeholder="Search....">
-          <i class="search link icon"></i>
-        </div>
+        <form name="search" action="#" th:action="@{/search}" method="post" target="_blank">
+          <div class="ui icon inverted transparent input m-margin-tb-tiny">
+            <input type="text" name="query" placeholder="Search...." th:value="${query}">
+            <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
