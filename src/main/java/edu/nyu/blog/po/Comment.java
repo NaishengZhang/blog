@@ -14,6 +14,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue
@@ -31,4 +32,6 @@ public class Comment {
     private List<Comment> replyComments = new ArrayList<>(); //child
     @ManyToOne
     private Comment parentComment; //相连的parent
+
+    private boolean adminComment;
 }
