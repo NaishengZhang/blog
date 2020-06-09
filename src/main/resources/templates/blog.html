@@ -239,7 +239,12 @@ h5,h6{font-size:1em;}
                                 <img src="https://unsplash.it/100/100?image=1005" th:src="@{${comment.avatar}}">
                             </a>
                             <div class="content">
-                                <a class="author" th:text="${comment.nickname}">Matt</a>
+                                <a class="author">
+                                    <span th:text="${comment.nickname}">Matt</span>
+                                    <div class="ui mini basic purple left pointing label m-padded-mini"
+                                         th:if="${comment.adminComment}">Author
+                                    </div>
+                                </a>
                                 <div class="metadata">
                                     <span class="date"
                                           th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">Today at 5:42PM</span>
@@ -256,9 +261,11 @@ h5,h6{font-size:1em;}
 
                             <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
                                 <div class="comment" th:each="reply : ${comment.replyComments}">
-
                                     <a class="author">
                                         <span th:text="${reply.nickname}">Matt</span>
+                                        <div class="ui mini basic purple left pointing label m-padded-mini"
+                                             th:if="${reply.adminComment}">Author
+                                        </div>
                                         &nbsp;<span th:text="|@ ${reply.parentComment.nickname}"
                                                     class="m-teal">@ Jenny</span>
                                     </a>
@@ -348,13 +355,15 @@ h5,h6{font-size:1em;}
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input type="text" name="nickname" placeholder="Name">
+                            <input type="text" name="nickname" placeholder="Name"
+                                   th:value="${session.user}!=null ? ${session.user.nickname}">
                         </div>
                     </div>
                     <div class="field m-mobile-wide m-margin-bottom-small">
                         <div class="ui left icon input">
                             <i class="mail icon"></i>
-                            <input type="text" name="email" placeholder="Email">
+                            <input type="text" name="email" placeholder="Email"
+                                   th:value="${session.user}!=null ? ${session.user.email}">
                         </div>
                     </div>
                     <div class="field m-margin-bottom-small m-mobile-wide">
@@ -373,9 +382,9 @@ h5,h6{font-size:1em;}
     <div class="ui vertical icon buttons">
         <button type="button" class="ui toc teal button">TOC</button>
         <a href="#comments-container" class="ui teal button">COMMENTS</a>
-<!--        <button class="ui icon button"><i class="github icon"></i></button>-->
-<!--        <button class="ui icon button"><i class="linkedin icon"></i></button>-->
-        <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+        <!--        <button class="ui icon button"><i class="github icon"></i></button>-->
+        <!--        <button class="ui icon button"><i class="linkedin icon"></i></button>-->
+        <div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i></div>
     </div>
 </div>
 
@@ -453,17 +462,17 @@ h5,h6{font-size:1em;}
     });
 
     $('.toc.button').popup({
-        popup : $('.toc-container.popup'),
-        on : 'click',
+        popup: $('.toc-container.popup'),
+        on: 'click',
         position: 'left center'
     });
     $('#toTop-button').click(function () {
-        $(window).scrollTo(0,500);
+        $(window).scrollTo(0, 500);
     });
     /*Roll*/
     var waypoint = new Waypoint({
         element: document.getElementById('waypoint'),
-        handler: function(direction) {
+        handler: function (direction) {
             if (direction == 'down') {
                 $('#toolbar').show(100);
             } else {
@@ -525,7 +534,7 @@ h5,h6{font-size:1em;}
             "email": $("[name='email']").val(),
             "content": $("[name='content']").val()
         }, function (responseTxt, statusTxt, xhr) {
-//        $(window).scrollTo($('#comment-container'),500);
+            // $(window).scrollTo($('#comment-container'),500);
             clearContent();
         });
     }
