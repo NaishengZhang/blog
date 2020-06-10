@@ -1,6 +1,7 @@
 package edu.nyu.blog.web;
 
 
+import edu.nyu.blog.po.Blog;
 import edu.nyu.blog.service.BlogService;
 import edu.nyu.blog.service.TagService;
 import edu.nyu.blog.service.TypeService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 
 @Controller
@@ -52,5 +55,11 @@ public class IndexController {
         return "blog";
     }
 
+    @GetMapping("/footer/newblog")
+    public String newblogs(Model model) {
+        List<Blog> blogs = blogService.listRecommendBlogTop(3);
+        model.addAttribute("newblogs", blogService.listRecommendBlogTop(3));
+        return "_fragments :: newblogList";
+    }
 
 }

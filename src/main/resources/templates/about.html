@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfeqkwwi6cj30mw0mw3yc.jpg">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--Navigation Bar-->
-<nav class="ui inverted attached segment m-shadow-small">
+<nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu ">
             <h2 class="ui teal header item">About Me</h2>
@@ -44,21 +44,29 @@
                     <div class="ui header">About Me</div>
                 </div>
                 <div class="ui attached segment">
-                    <p class="m-text">Naisheng Zhang, Software Developer, Love coding, Enjoy Freedom</p>
-                    <p class="m-text">Java, Python, SpringBoot, Spark</p>
+                    <p class="m-text" th:text="#{about.introduction}">Naisheng Zhang, Software Developer, Love coding,
+                        Enjoy Freedom</p>
+                    <!--<p class="m-text m-margin-bottom-small" th:text="#{about.skills}">Java, Python, SpringBoot, Spark</p>-->
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Python</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Golang</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Spring Boot</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Hadoop</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Spark</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MySQL</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MongoDB</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Redis</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Docker</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">AWS</div>
                 </div>
                 <div class="ui attached segment">
                     <div class="ui orange basic left pointing label m-margin-tb-tiny">Programing</div>
                     <div class="ui orange basic left pointing label m-margin-tb-tiny">Writing</div>
-                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Traveling</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Travel</div>
+                    <div class="ui orange basic left pointing label m-margin-tb-tiny">Movie</div>
                     <div class="ui orange basic left pointing label m-margin-tb-tiny">....</div>
-                </div>
-                <div class="ui attached segment">
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Algorithms</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Spark</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MySQL</div>
-                    <div class="ui teal basic left pointing label m-margin-tb-tiny">....</div>
                 </div>
                 <div class="ui bottom attached segment">
                     <a href="https://github.com/NaishengZhang" class="ui circular icon button">
@@ -67,9 +75,7 @@
                     <a href="https://www.linkedin.com/in/naisheng-zhang-8088a6170/" class="ui circular icon button">
                         <i class="linkedin icon"></i>
                     </a>
-                    <a href="#" class="ui wechat circular icon button">
-                        <i class="weixin icon"></i>
-                    </a>
+                    <!--<a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>-->
                     <div class="ui wechat-qr flowing popup transition hidden">
                         <img src="../static/images/wechat.png" alt="" class="ui rounded image" style="width: 120px">
                     </div>
@@ -81,7 +87,7 @@
 </div>
 
 <!--bottom footer-->
-<footer class="ui inverted vertical segment m-padded-tb-massive">
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
     <div class="ui center aligned container">
         <div class="ui inverted divided stackable grid">
             <div class="three wide column">
@@ -118,8 +124,10 @@
     </div>
 </footer>
 
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
 
 <script>
     $('.menu.toggle').click(function () {

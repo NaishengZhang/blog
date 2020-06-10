@@ -184,24 +184,26 @@ h5,h6{font-size:1em;}
                 </div>
             </div>
 
-            <!--rewards-->
-            <div class="ui center aligned basic segment">
-                <button id="payButton" class="ui orange basic circular button">Buy Me A Bubble Tea</button>
-            </div>
-            <div class="ui payQR flowing popup transition hidden">
-                <div class="ui orange basic label">
-                    <div class="ui images" style="font-size: inherit !important;">
-                        <div class="image">
-                            <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt=""
-                                 class="ui rounded bordered image"
-                                 style="width: 120px">
-                            <div>WeChat Payment</div>
-                        </div>
-                        <div class="image">
-                            <img src="../static/images/venmo.png" th:src="@{/images/venmo.png}" alt=""
-                                 class="ui rounded bordered image"
-                                 style="width: 140px">
-                            <div>Venmo Payment</div>
+            <!--buy me a coffee-->
+            <div th:if="${blog.appreciation}">
+                <div class="ui center aligned basic segment">
+                    <button id="payButton" class="ui orange basic circular button">Buy Me A Bubble Tea</button>
+                </div>
+                <div class="ui payQR flowing popup transition hidden">
+                    <div class="ui orange basic label">
+                        <div class="ui images" style="font-size: inherit !important;">
+                            <div class="image">
+                                <img src="../static/images/wechat.png" th:src="@{/images/wechat.png}" alt=""
+                                     class="ui rounded bordered image"
+                                     style="width: 120px">
+                                <div>WeChat Payment</div>
+                            </div>
+                            <div class="image">
+                                <img src="../static/images/venmo.png" th:src="@{/images/venmo.png}" alt=""
+                                     class="ui rounded bordered image"
+                                     style="width: 140px">
+                                <div>Venmo Payment</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -209,7 +211,7 @@ h5,h6{font-size:1em;}
         </div>
 
         <!--blog info-->
-        <div class="ui attached positive message">
+        <div class="ui attached positive message" th:if="${blog.shareStatement}">
             <div class="ui middle aligned grid">
                 <div class="eleven wide column">
                     <ui class="list">
@@ -229,7 +231,7 @@ h5,h6{font-size:1em;}
         </div>
 
         <!--comments-->
-        <div class="ui bottom attached segment">
+        <div class="ui bottom attached segment" th:if="${blog.commentabled}">
             <div id="comment-container" class="ui teal segment">
                 <div th:fragment="commentList">
                     <div class="ui threaded comments" style="max-width: 100%">

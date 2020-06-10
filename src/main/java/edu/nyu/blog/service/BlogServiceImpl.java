@@ -124,7 +124,6 @@ public class BlogServiceImpl implements BlogService {
         Pageable pageable = new PageRequest(0, size, sort);
         return blogRepository.findTop(pageable);
     }
-
     @Override
     public Map<String, List<Blog>> archiveBlog() {
         List<String> years = blogRepository.findGroupYear();

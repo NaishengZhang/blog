@@ -176,3 +176,14 @@ body {
         width: 100% !important;
     }
 }
+
+
+.line-limit-length {
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+}

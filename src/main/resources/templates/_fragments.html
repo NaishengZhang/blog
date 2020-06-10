@@ -55,19 +55,21 @@
       </div>
 
       <div class="three wide column">
-        <h4 class="ui inverted header m-text-thin m-text-spaced">NEW ARTICLES</h4>
-        <div class="ui inverted link list">
-          <a href="#" class="item">User Story</a>
-          <a href="#" class="item">User Story</a>
-          <a href="#" class="item">User Story</a>
+        <h4 class="ui inverted header m-text-spaced">NEW ARTICLES</h4>
+        <div id="newblog-container">
+          <div class="ui inverted link list" th:fragment="newblogList">
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"
+               class="item m-text-thin line-limit-length" th:each="blog : ${newblogs}" th:text="${blog.title}">User
+              Story</a>
+          </div>
         </div>
       </div>
 
       <div class="three wide column">
         <h4 class="ui inverted header m-text-thin m-text-spaced">CONTACT ME</h4>
         <div class="ui inverted link list">
-          <a href="#" class="item">Email: jonathan.n.zhang@gmail.com</a>
-          <a href="#" class="item">Phone: 347-204-5507</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.email}">Email: jonathan.n.zhang@gmail.com</a>
+          <a href="#" class="item m-text-thin" th:text="#{index.phone}">Phone: 347-204-5507</a>
 
         </div>
       </div>
@@ -92,6 +94,9 @@
   <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
   <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
   <script src="../static/lib/waypoints/jquery.waypoints.min.js" th:src="@{/lib/waypoints/jquery.waypoints.min.js}"></script>
+  <script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+  </script>
 </th:block>
 
 </body>
