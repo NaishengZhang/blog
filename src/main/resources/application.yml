@@ -2,7 +2,7 @@ spring:
   thymeleaf:
     mode: HTML
   profiles:
-    active: dev
+    active: pro
   messages:
     basename: i18n/messages
 comment.avatar: /images/avatar.png

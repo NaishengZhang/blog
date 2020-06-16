@@ -14,7 +14,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>blog</name>
     <description>Blog Platform Using Spring Boot</description>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,13 +37,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!-- exclude springboot's tomcat -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
+            <!--          &lt;!&ndash; exclude springboot's tomcat &ndash;&gt;
+                      <exclusions>
+                          <exclusion>
+                              <groupId>org.springframework.boot</groupId>
+                              <artifactId>spring-boot-starter-tomcat</artifactId>
+                          </exclusion>
+                      </exclusions>-->
         </dependency>
 
 
